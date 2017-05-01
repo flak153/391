@@ -36,3 +36,4 @@ def water(valve_time):
     valve.dir(mraa.DIR_OUT)
     valve.write(1)
     time.sleep(valve_time)
+    return 'watered'
