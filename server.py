@@ -1,5 +1,6 @@
 from flask import Flask
 import requests, json, time
+from flask_cors import CORS, cross_origin
 import mraa
 
 url = "https://api.darksky.net/forecast/d19642947c22791bf57113f02837e88f/40.9257,-73.1409"
@@ -7,6 +8,7 @@ url = "https://api.darksky.net/forecast/d19642947c22791bf57113f02837e88f/40.9257
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/current')
 def current_weather():
