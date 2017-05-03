@@ -8,19 +8,15 @@ url = "https://api.darksky.net/forecast/d19642947c22791bf57113f02837e88f/40.9257
 def measure_moisture():
     sensor7 = mraa.Gpio(7)
     sensor7.dir(mraa.DIR_IN)
-    print(sensor7.read())
 
     sensor6 = mraa.Gpio(6)
     sensor6.dir(mraa.DIR_IN)
-    print(sensor6.read())
 
     sensor5 = mraa.Gpio(5)
     sensor5.dir(mraa.DIR_IN)
-    print(sensor5.read())
 
     sensor4 = mraa.Gpio(4)
     sensor4.dir(mraa.DIR_IN)
-    print(sensor4.read())
     return float(sensor7.read() + sensor6.read() + sensor5.read() + sensor4.read())
 
 def water(valve_time):
