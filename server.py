@@ -32,7 +32,7 @@ def forecast():
     print(json.dumps(response, indent=4, sort_keys=True))
     return json.dumps(response, indent=4, sort_keys=True)
 
-@app.route('/history/<days_back>')
+@app.route('/history/<int:days_back>')
 def history(days_back):
     payload = {
         'exclude': 'flags,minutely,hourly,currently',
