@@ -2,8 +2,6 @@ from flask import Flask
 import requests, json, time
 from flask_cors import CORS, cross_origin
 import mraa
-import atexit
-from apscheduler.scheduler import Scheduler
 
 url = "https://api.darksky.net/forecast/d19642947c22791bf57113f02837e88f/40.9257,-73.1409"
 
@@ -11,27 +9,6 @@ url = "https://api.darksky.net/forecast/d19642947c22791bf57113f02837e88f/40.9257
 
 app = Flask(__name__)
 CORS(app)
-cron = Scheduler(daemon=True)
-cron.start()
-
-@cron.interval_schedule(hours=6)
-def rain_check():
-    duration = 1.0
-    if measure_moisture() < 1:
-        duration+=1
-    if measure_moisture() < 2:
-        duration+=.5
-    water(duration)
-
-    payload = {
-        'exclude': 'flags,minutely,hourly',
-    }
-    response = requests.get(url, params=payload)
-    response = response.json()
-    print(response)
-
-
-atexit.register(lambda: cron.shutdown(wait=False))
 
 @app.route('/current')
 def current_weather():
