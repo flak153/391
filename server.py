@@ -44,4 +44,5 @@ def water(valve_time):
 @app.route('/moisture')
 def current_moisture():
     sensor = mraa.Aio(0)
+    print(sensor)
     return str(float(sensor.read()))
