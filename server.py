@@ -41,4 +41,7 @@ def water(valve_time):
     valve.write(0)
     return 'watered'
 
-
+@app.route('/moisture')
+def current_moisture():
+    sensor = mraa.Aio(11)
+    return str(float(sensor.read()))
