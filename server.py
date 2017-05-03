@@ -37,7 +37,7 @@ def history(days_back):
     payload = {
         'exclude': 'flags,minutely,hourly,currently',
     }
-
+    print(url + ',' + str(time.time() - 86400))
     response = requests.get(url + ',' + str(time.time() - 86400), params=payload)
     response = response.json()
     print(json.dumps(response, indent=4, sort_keys=True))
