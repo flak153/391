@@ -42,7 +42,7 @@ def rain_check():
     }
     response = requests.get(url, params=payload)
     response = response.json()
-    print(response)
+    print(response['currently']['precipIntensity'])
     if measure_moisture() > 3:
         duration*=0
     water(duration)
