@@ -13,7 +13,7 @@ CORS(app)
 @app.route('/current')
 def current_weather():
     payload = {
-        'exclude': 'flags,minutely',
+        'exclude': 'flags,minutely,hourly,daily',
     }
 
     response = requests.get(url, params=payload)
@@ -24,7 +24,7 @@ def current_weather():
 @app.route('/forecast')
 def forecast():
     payload = {
-        'exclude': 'flags,minutely,hourly,currently',
+        'exclude': 'flags,minutely,currently',
     }
 
     response = requests.get(url, params=payload)
