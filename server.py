@@ -12,6 +12,7 @@ CORS(app)
 
 @app.route('/current')
 def current_weather():
+    """Returns the current weather in Stony Brook"""
     payload = {
         'exclude': 'flags,minutely,hourly,daily',
     }
@@ -23,6 +24,7 @@ def current_weather():
 
 @app.route('/forecast')
 def forecast():
+    """Gives the forward weather forcast"""
     payload = {
         'exclude': 'flags,minutely,currently',
     }
@@ -34,6 +36,8 @@ def forecast():
 
 @app.route('/history/<int:days_back>')
 def history(days_back):
+    """Gives back weather history from days_back days back"""
+
     payload = {
         'exclude': 'flags,minutely,hourly,currently',
     }
@@ -46,10 +50,13 @@ def history(days_back):
 
 @app.route('/water/<float:valve_time>')
 def water_endpoint(valve_time):
+    """The endpoint which allows a user to force water the plant from their browser"""
     water(valve_time)
     return 'watered'
 
 def water(valve_time):
+    """This function is responsible for opening the solenoid valve for the set amount of time"""
+
     valve = mraa.Gpio(12)
     valve.dir(mraa.DIR_OUT)
     valve.write(1)
@@ -62,6 +69,9 @@ def current_moisture():
 
 
 def measure_moisture():
+    """Each of the sensors is calibrated for a specific soil moisture level. If the moisture level is present, the sensor
+         output bit will flip from 0 to 1.We read each one, and assign the moisture level based on the sum"""
+
     sensor7 = mraa.Gpio(7)
     sensor7.dir(mraa.DIR_IN)
 
