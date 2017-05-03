@@ -13,7 +13,7 @@ CORS(app)
 @app.route('/current')
 def current_weather():
     payload = {
-        'exclude': 'flags,minutely,hourly,daily',
+        'exclude': 'flags,minutely',
     }
 
     response = requests.get(url, params=payload)
@@ -71,3 +71,4 @@ def current_moisture():
     sensor4.dir(mraa.DIR_IN)
     print(sensor4.read())
     return str(float(sensor7.read() + sensor6.read() + sensor5.read() + sensor4.read()))
+
